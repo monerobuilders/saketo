@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/locals.dart';
 
-import '../../widgets/bottom_navigation_button.dart';
+import '../../widgets/buttons/bottom_navigation_button.dart';
 
 class WalletMode extends StatefulWidget {
   const WalletMode({
@@ -28,37 +28,115 @@ class _WalletModeState extends State<WalletMode> {
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               children: [
+                const SizedBox(
+                  height: 10
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 50, bottom: 20),
+                    padding: const EdgeInsets.only(left: 50, right: 50),
                   child: Text(
-                    widget.isNew ? 'Create new wallet' : 'Import wallet',
+                    Locals.of(context)!.chooseWalletMode,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      fontSize: 40,
+                      fontSize: 25,
                       fontFamily: 'Oxanium',
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 50, bottom: 20),
-                  child: Text(
-                    widget.isNew ? 'Create a new wallet' : 'Import an existing wallet',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Oxanium',
+                const SizedBox(
+                  height: 30
+                ),
+                SizedBox(
+                  height: 250,
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 5, bottom: 5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          )
+                      ),
+                      Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 5, right: 10, bottom: 5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          )
+                      ),
+                    ],
+                  )
+                ),
+                SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                    child:  Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                    child:  Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+                    child:  Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
           BottomNavigationButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/login');
             },
             text: Locals.of(context)!.continueStr,
           ),
