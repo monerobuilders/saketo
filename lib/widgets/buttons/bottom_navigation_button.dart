@@ -30,7 +30,7 @@ class BottomNavigationButton extends StatelessWidget {
                   text,
                   style: const TextStyle(
                     fontSize: 25,
-                    fontFamily: 'Oxanium',
+                    fontFamily: 'nunito',
                     fontWeight: FontWeight.w700,
                   ),
                 ),

@@ -24,7 +24,7 @@ class Onboarding extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 40,
-                      fontFamily: 'Oxanium',
+                      fontFamily: 'nunito',
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -36,7 +36,7 @@ class Onboarding extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 20,
-                      fontFamily: 'Oxanium',
+                      fontFamily: 'nunito',
                     ),
                   ),
                 )

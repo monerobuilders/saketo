@@ -20,6 +20,7 @@ environment:
   sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
+  fluentui_system_icons: ^1.1.246
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -35,8 +36,14 @@ flutter:
   generate: true
 
   fonts:
-    - family: Oxanium
+    - family: nunito
       fonts:
-        - asset: assets/fonts/Oxanium-Regular.ttf
-        - asset: assets/fonts/Oxanium-Bold.ttf
+        - asset: assets/fonts/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito-Bold.ttf
           weight: 700
+    - family: architects-daughter
+      fonts:
+        - asset: assets/fonts/ArchitectsDaughter-Regular.ttf
+    - family: russo-one
+      fonts:
+        - asset: assets/fonts/RussoOne-Regular.ttf

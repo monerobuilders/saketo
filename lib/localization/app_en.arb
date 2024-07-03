@@ -2,5 +2,7 @@
   "welcomeToSaketo": "Welcome to Saketo",
   "onboardingDescription": "Fast, secure and easy to use non-custodial wallet for all Monero users.",
   "continueStr": "Continue",
-  "chooseWalletMode": "Choose Wallet Mode"
+  "chooseWalletMode": "Choose Wallet Mode",
+  "chooseWalletModeDescription": "Selected mode will define the options available to you. You can change it later.",
+  "continueWithX": "Use {mode}"
 }
