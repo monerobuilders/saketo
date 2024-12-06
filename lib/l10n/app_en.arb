@@ -1,0 +1,7 @@
+{
+  "welcome": "Welcome",
+  "startByCreatingWallet": "Let's start by creating a new wallet!",
+  "createAWallet": "CREATE A WALLET",
+  "alreadyHaveOne": "or already have one?",
+  "restore": "RESTORE"
+}
