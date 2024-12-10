@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:saketo/wallet/wallet_modes/advanced/advanced_mode.dart';
+import 'package:saketo/wallet/wallet_modes/basic/basic_mode.dart';
+import 'package:saketo/wallet/wallet_modes/paranoia/paranoia_mode.dart';
 
-import '../../wallet/wallet_mode_enum.dart';
+import '../../wallet/wallet_modes/wallet_mode_abstract.dart';
 
 class ModeSelectionPage extends StatefulWidget {
-  const ModeSelectionPage({super.key});
+  final Map<String, Object> extra;
+
+  const ModeSelectionPage({super.key, required this.extra});
 
   @override
   State<ModeSelectionPage> createState() => _ModeSelectionPageState();
 }
 
 class _ModeSelectionPageState extends State<ModeSelectionPage> {
-  WalletMode _selectedMode = WalletMode.basic;
+  WalletMode _selectedMode = WalletMode.basic();
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +26,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
         child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.primary,
             body: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+                padding: const EdgeInsets.all(32),
                 child: Column(children: [
                   SizedBox(
                     width: double.infinity,
@@ -95,7 +100,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                         ),
                         const Spacer(),
                         Text(
-                          'CHOOSE WALLET MODE',
+                          AppLocalizations.of(context)!.chooseWalletMode,
                           style: TextStyle(
                             fontSize: 16,
                             color: Theme.of(context).colorScheme.tertiary,
@@ -106,7 +111,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: 16,
                   ),
                   Expanded(
                       child: Column(
@@ -117,13 +122,13 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                               child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                _selectedMode = WalletMode.basic;
+                                _selectedMode = WalletMode.basic();
                               });
                             },
                             child: Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                  color: _selectedMode == WalletMode.basic
+                                  color: _selectedMode is BasicMode
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.scrim,
                                   borderRadius: BorderRadius.circular(5)),
@@ -133,21 +138,22 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: _selectedMode ==
-                                                    WalletMode.basic
+                                            color: _selectedMode is BasicMode
                                                 ? Theme.of(context)
                                                     .colorScheme
                                                     .scrim
-                                                : const Color(0xFF3F3F3F),
+                                                : Theme.of(context)
+                                                    .colorScheme
+                                                    .shadow,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: const EdgeInsets.all(10),
                                         height: 40,
                                         width: 40,
                                         child: SvgPicture.asset(
-                                          'app_assets/box.svg',
+                                          WalletMode.basic().icon,
                                           colorFilter: ColorFilter.mode(
-                                              _selectedMode == WalletMode.basic
+                                              _selectedMode is BasicMode
                                                   ? Theme.of(context)
                                                       .colorScheme
                                                       .tertiary
@@ -161,7 +167,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                         width: 12,
                                       ),
                                       Text(
-                                        "Basic",
+                                        AppLocalizations.of(context)!.basic,
                                         style: TextStyle(
                                           color: Theme.of(context)
                                               .colorScheme
@@ -175,7 +181,8 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                     height: 12,
                                   ),
                                   Text(
-                                    "Default.\nAutomates almost everything.",
+                                    AppLocalizations.of(context)!
+                                        .basicDescription,
                                     style: TextStyle(
                                       color:
                                           Theme.of(context).colorScheme.surface,
@@ -196,8 +203,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                             width: 24,
                                             height: 24,
                                             decoration: BoxDecoration(
-                                              color: _selectedMode ==
-                                                      WalletMode.basic
+                                              color: _selectedMode is BasicMode
                                                   ? Theme.of(context)
                                                       .colorScheme
                                                       .secondary
@@ -215,8 +221,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                             ),
                                             child: Center(
                                               child: Visibility(
-                                                  visible: _selectedMode ==
-                                                      WalletMode.basic,
+                                                  visible: _selectedMode is BasicMode,
                                                   child: Container(
                                                     width: 14,
                                                     height: 14,
@@ -235,18 +240,18 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                               ),
                             ),
                           )),
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 12),
                           Expanded(
                               child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                _selectedMode = WalletMode.advanced;
+                                _selectedMode = WalletMode.advanced();
                               });
                             },
                             child: Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                  color: _selectedMode == WalletMode.advanced
+                                  color: _selectedMode is AdvancedMode
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.scrim,
                                   borderRadius: BorderRadius.circular(5)),
@@ -256,22 +261,22 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: _selectedMode ==
-                                                    WalletMode.advanced
+                                            color: _selectedMode is AdvancedMode
                                                 ? Theme.of(context)
                                                     .colorScheme
                                                     .scrim
-                                                : const Color(0xFF3F3F3F),
+                                                : Theme.of(context)
+                                                    .colorScheme
+                                                    .shadow,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
-                                        padding: const EdgeInsets.all(6),
+                                        padding: const EdgeInsets.all(10),
                                         height: 40,
                                         width: 40,
                                         child: SvgPicture.asset(
-                                          'app_assets/adv_box.svg',
+                                          WalletMode.advanced().icon,
                                           colorFilter: ColorFilter.mode(
-                                              _selectedMode ==
-                                                      WalletMode.advanced
+                                              _selectedMode is AdvancedMode
                                                   ? Theme.of(context)
                                                       .colorScheme
                                                       .tertiary
@@ -285,7 +290,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                         width: 12,
                                       ),
                                       Text(
-                                        "Advanced",
+                                        AppLocalizations.of(context)!.advanced,
                                         style: TextStyle(
                                           color: Theme.of(context)
                                               .colorScheme
@@ -299,7 +304,8 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                     height: 12,
                                   ),
                                   Text(
-                                    "For experienced users to access more configuration options.",
+                                    AppLocalizations.of(context)!
+                                        .advancedDescription,
                                     style: TextStyle(
                                       color:
                                           Theme.of(context).colorScheme.surface,
@@ -320,8 +326,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                             width: 24,
                                             height: 24,
                                             decoration: BoxDecoration(
-                                              color: _selectedMode ==
-                                                      WalletMode.advanced
+                                              color: _selectedMode is AdvancedMode
                                                   ? Theme.of(context)
                                                       .colorScheme
                                                       .secondary
@@ -339,8 +344,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                             ),
                                             child: Center(
                                               child: Visibility(
-                                                  visible: _selectedMode ==
-                                                      WalletMode.advanced,
+                                                  visible: _selectedMode is AdvancedMode,
                                                   child: Container(
                                                     width: 14,
                                                     height: 14,
@@ -362,86 +366,89 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                         ],
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 12,
                       ),
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            _selectedMode = WalletMode.paranoia;
+                            _selectedMode = WalletMode.paranoia();
                           });
                         },
                         child: Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                              color: _selectedMode == WalletMode.paranoia
+                              color: _selectedMode is ParanoiaMode
                                   ? Theme.of(context).colorScheme.secondary
                                   : Theme.of(context).colorScheme.scrim,
                               borderRadius: BorderRadius.circular(5)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Expanded(child: Container(
-                                padding: const EdgeInsets.all(6),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: _selectedMode ==
-                                                  WalletMode.paranoia
-                                                  ? Theme.of(context)
-                                                  .colorScheme
-                                                  .scrim
-                                                  : const Color(0xFF3F3F3F),
-                                              borderRadius:
-                                              BorderRadius.circular(5)),
-                                          padding: const EdgeInsets.all(10),
-                                          height: 40,
-                                          width: 40,
-                                          child: SvgPicture.asset(
-                                            'app_assets/eye_off.svg',
-                                            colorFilter: ColorFilter.mode(
-                                                _selectedMode ==
-                                                    WalletMode.paranoia
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: _selectedMode is ParanoiaMode
                                                     ? Theme.of(context)
-                                                    .colorScheme
-                                                    .tertiary
+                                                        .colorScheme
+                                                        .scrim
                                                     : Theme.of(context)
-                                                    .colorScheme
-                                                    .surface,
-                                                BlendMode.srcIn),
+                                                        .colorScheme
+                                                        .shadow,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            padding: const EdgeInsets.all(10),
+                                            height: 40,
+                                            width: 40,
+                                            child: SvgPicture.asset(
+                                              WalletMode.paranoia().icon,
+                                              colorFilter: ColorFilter.mode(
+                                                  _selectedMode is ParanoiaMode
+                                                      ? Theme.of(context)
+                                                          .colorScheme
+                                                          .tertiary
+                                                      : Theme.of(context)
+                                                          .colorScheme
+                                                          .surface,
+                                                  BlendMode.srcIn),
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 12,
-                                        ),
-                                        Text(
-                                          "Paranoia",
-                                          style: TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .tertiary,
-                                            fontSize: 14,
+                                          const SizedBox(
+                                            width: 12,
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Text(
-                                      "Ideal for users seeking maximum privacy with strict security measures.",
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .surface,
-                                        fontSize: 12,
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .paranoia,
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .tertiary,
+                                              fontSize: 14,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    )
-                                  ],
-                                ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .paranoiaDescription,
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                          fontSize: 12,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               const SizedBox(
@@ -451,27 +458,20 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                 width: 24,
                                 height: 24,
                                 decoration: BoxDecoration(
-                                  color: _selectedMode ==
-                                      WalletMode.paranoia
-                                      ? Theme.of(context)
-                                      .colorScheme
-                                      .secondary
-                                      : Theme.of(context)
-                                      .colorScheme
-                                      .scrim,
+                                  color: _selectedMode is ParanoiaMode
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Theme.of(context).colorScheme.scrim,
                                   border: Border.all(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .tertiary,
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
                                     width: 1,
                                   ),
-                                  borderRadius:
-                                  BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Center(
                                   child: Visibility(
-                                      visible: _selectedMode ==
-                                          WalletMode.paranoia,
+                                      visible:
+                                      _selectedMode is ParanoiaMode,
                                       child: Container(
                                         width: 14,
                                         height: 14,
@@ -489,7 +489,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 12,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -499,85 +499,93 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                           width: double.infinity,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                              color: const Color(0xFF4A4A4A),
+                              color: Theme.of(context).colorScheme.shadow,
                               borderRadius: BorderRadius.circular(5)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Expanded(child: Container(
-                                padding: const EdgeInsets.all(6),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFF555555),
-                                              borderRadius:
-                                              BorderRadius.circular(5)),
-                                          padding: const EdgeInsets.all(10),
-                                          height: 40,
-                                          width: 40,
-                                          child: SvgPicture.asset(
-                                            'app_assets/cloud.svg',
-                                            colorFilter: ColorFilter.mode(
-                                                Theme.of(context)
-                                                    .colorScheme
-                                                    .surface,
-                                                BlendMode.srcIn),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 12,
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: const Color (0xFF555555),
-                                              borderRadius:
-                                              BorderRadius.circular(5)),
-                                          height: 40,
-                                          width: 60,
-                                          child: Center(
-                                            child: Text(
-                                              "Soon",
-                                              style: TextStyle(
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .surface,
-                                                fontSize: 14,
+                                                    .shadow,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            padding: const EdgeInsets.all(10),
+                                            height: 40,
+                                            width: 40,
+                                            child: SvgPicture.asset(
+                                              WalletMode.lightweight().icon,
+                                              colorFilter: ColorFilter.mode(
+                                                  Theme.of(context)
+                                                      .colorScheme
+                                                      .surface,
+                                                  BlendMode.srcIn),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 12,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .shadow,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            height: 40,
+                                            width: 60,
+                                            child: Center(
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .soon,
+                                                style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .surface,
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 12,
-                                        ),
-                                        Text(
-                                          "Lightweight",
-                                          style: TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .surface,
-                                            fontSize: 14,
+                                          const SizedBox(
+                                            width: 12,
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Text(
-                                      "Connects to a remote server to scan for transactions efficiently.",
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .surface,
-                                        fontSize: 12,
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .lightweight,
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .surface,
+                                              fontSize: 14,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    )
-                                  ],
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .lightweightDescription,
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                          fontSize: 12,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
                               ),
                               const SizedBox(
                                 width: 12,
@@ -586,15 +594,13 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                 width: 24,
                                 height: 24,
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFF4A4A4A),
+                                  color: Theme.of(context).colorScheme.shadow,
                                   border: Border.all(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .tertiary,
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
                                     width: 1,
                                   ),
-                                  borderRadius:
-                                  BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Center(
                                   child: Visibility(
@@ -616,7 +622,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 12,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -626,85 +632,93 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                           width: double.infinity,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                              color: const Color(0xFF4A4A4A),
+                              color: Theme.of(context).colorScheme.shadow,
                               borderRadius: BorderRadius.circular(5)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Expanded(child: Container(
-                                padding: const EdgeInsets.all(6),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFF555555),
-                                              borderRadius:
-                                              BorderRadius.circular(5)),
-                                          padding: const EdgeInsets.all(10),
-                                          height: 40,
-                                          width: 40,
-                                          child: SvgPicture.asset(
-                                            'app_assets/shield.svg',
-                                            colorFilter: ColorFilter.mode(
-                                                Theme.of(context)
-                                                    .colorScheme
-                                                    .surface,
-                                                BlendMode.srcIn),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 12,
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: const Color (0xFF555555),
-                                              borderRadius:
-                                              BorderRadius.circular(5)),
-                                          height: 40,
-                                          width: 60,
-                                          child: Center(
-                                            child: Text(
-                                              "Soon",
-                                              style: TextStyle(
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .surface,
-                                                fontSize: 14,
+                                                    .shadow,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            padding: const EdgeInsets.all(10),
+                                            height: 40,
+                                            width: 40,
+                                            child: SvgPicture.asset(
+                                              WalletMode.hardware().icon,
+                                              colorFilter: ColorFilter.mode(
+                                                  Theme.of(context)
+                                                      .colorScheme
+                                                      .surface,
+                                                  BlendMode.srcIn),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 12,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .shadow,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            height: 40,
+                                            width: 60,
+                                            child: Center(
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .soon,
+                                                style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .surface,
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 12,
-                                        ),
-                                        Text(
-                                          "Hardware",
-                                          style: TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .surface,
-                                            fontSize: 14,
+                                          const SizedBox(
+                                            width: 12,
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Text(
-                                      "Securing your funds by storing your private keys in a seperate secure device.",
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .surface,
-                                        fontSize: 12,
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .hardware,
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .surface,
+                                              fontSize: 14,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    )
-                                  ],
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .hardwareDescription,
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                          fontSize: 12,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
                               ),
                               const SizedBox(
                                 width: 12,
@@ -715,13 +729,11 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF4A4A4A),
                                   border: Border.all(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .tertiary,
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
                                     width: 1,
                                   ),
-                                  borderRadius:
-                                  BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Center(
                                   child: Visibility(
@@ -745,7 +757,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                     ],
                   )),
                   const SizedBox(
-                    height: 24,
+                    height: 16,
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -760,7 +772,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                             height: 48,
                             width: 48,
                             child: SvgPicture.asset(
-                              'app_assets/chevron_left.svg',
+                              'app_assets/arrow_left.svg',
                               colorFilter: ColorFilter.mode(
                                   Theme.of(context).colorScheme.surface,
                                   BlendMode.srcIn),
@@ -772,7 +784,13 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                         ),
                         Expanded(
                             child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  widget.extra.addAll({
+                                    'walletMode': _selectedMode,
+                                  });
+                                  context.push('/previewConfigurationPage',
+                                      extra: widget.extra);
+                                },
                                 style: ElevatedButton.styleFrom(
                                     minimumSize:
                                         const Size(double.infinity, 48),
@@ -783,7 +801,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5))),
-                                child: Text('NEXT',
+                                child: Text(AppLocalizations.of(context)!.next,
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .colorScheme

@@ -22,13 +22,14 @@ class Saketo extends StatelessWidget {
       title: 'Saketo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF3E3E3E), // Gunmetal
-          primary: const Color(0xFF3E3E3E), // Gunmetal
-          secondary: const Color(0xFF242424), // Charcoal
-          tertiary: const Color(0xFFF0F0F0), // New Smoke
-          surface: const Color(0xFFBBBBBB), // New Dark Text
-          scrim: const Color(0xFF323232) // Greyish
-        ),
+            seedColor: const Color(0xFF3E3E3E), // Gunmetal
+            primary: const Color(0xFF3E3E3E), // Gunmetal
+            secondary: const Color(0xFF242424), // Charcoal
+            tertiary: const Color(0xFFF0F0F0), // New Smoke
+            surface: const Color(0xFFBBBBBB), // New Dark Text
+            scrim: const Color(0xFF323232), // Greyish
+            shadow: const Color(0x1AB3B3B3) // Simple Background
+            ),
         useMaterial3: true,
       ),
       localizationsDelegates: const [

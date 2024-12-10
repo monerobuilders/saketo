@@ -43,21 +43,28 @@ class _WelcomePageState extends State<WelcomePage> {
                                   color:
                                       Theme.of(context).colorScheme.tertiary)),
                           const SizedBox(height: 8),
-                          Text(
-                              AppLocalizations.of(context)!
-                                  .startByCreatingWallet,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color:
-                                      Theme.of(context).colorScheme.tertiary)),
+                          Center(
+                            child: Text(
+                                AppLocalizations.of(context)!
+                                    .startByCreatingWallet,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color:
+                                    Theme.of(context).colorScheme.tertiary,
+                                )),
+                          )
                         ],
                       ),
                     )),
                     const SizedBox(height: 32),
                     ElevatedButton(
                       onPressed: () {
-                        // TODO: Pass parameters
-                        context.push('/modeSelectionPage');
+                        context.push('/modeSelectionPage',
+                            extra: Map<String, Object>.from({
+                              'isNewWallet': true,
+                              'isCreateWallet': true,
+                            }));
                       },
                       style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 56),
@@ -83,8 +90,11 @@ class _WelcomePageState extends State<WelcomePage> {
                         const SizedBox(height: 16),
                         ElevatedButton(
                             onPressed: () {
-                              // TODO: Pass parameters
-                              context.push('/modeSelectionPage');
+                              context.push('/modeSelectionPage',
+                                  extra: Map<String, Object>.from({
+                                    'isNewWallet': true,
+                                    'isCreateWallet': false,
+                                  }));
                             },
                             style: ElevatedButton.styleFrom(
                                 foregroundColor:

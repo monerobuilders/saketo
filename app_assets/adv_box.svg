@@ -1,26 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
-  <g id="Layer_1-2" data-name="Layer 1">
-    <g>
-      <g>
-        <g>
-          <polyline points="12.5 4.53 8.5 6.94 4.5 4.53" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-          <line x1="8.5" y1="6.94" x2="8.5" y2="11.72" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-          <polygon points="4.5 4.53 4.5 9.31 8.5 11.72 12.5 9.31 12.5 4.53 8.5 2.12 4.5 4.53" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-        </g>
-        <g>
-          <line x1="8.5" y1="11.72" x2="8.5" y2="13.28" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-          <circle cx="8.5" cy="14.08" r=".8" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-        </g>
-        <g>
-          <circle cx="14.13" cy="12.48" r=".8" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-          <polyline points="13.33 12.48 11.7 12.48 11.7 9.79" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-        </g>
-        <g>
-          <circle cx="2.87" cy="12.48" r=".8" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-          <polyline points="3.67 12.48 5.3 12.48 5.3 9.79" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
-        </g>
-      </g>
-    </g>
-  </g>
+<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.1953 4.37498L10.5703 7.74998L4.94531 4.37498" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
+<path d="M10.5703 7.75V14.5" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
+<path d="M4.94531 4.375V11.125L10.5703 14.5L16.1953 11.125V4.375L10.5703 1L4.94531 4.375Z" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
+<path d="M10.5703 14.5V16.75" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
+<path d="M10.5703 19C11.1916 19 11.6953 18.4963 11.6953 17.875C11.6953 17.2537 11.1916 16.75 10.5703 16.75C9.94899 16.75 9.44531 17.2537 9.44531 17.875C9.44531 18.4963 9.94899 19 10.5703 19Z" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
+<path d="M18.4453 16.75C19.0666 16.75 19.5703 16.2463 19.5703 15.625C19.5703 15.0036 19.0666 14.5 18.4453 14.5C17.824 14.5 17.3203 15.0036 17.3203 15.625C17.3203 16.2463 17.824 16.75 18.4453 16.75Z" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
+<path d="M17.3203 15.625H15.0703V11.8281" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
+<path d="M2.55469 16.75C3.17601 16.75 3.67969 16.2463 3.67969 15.625C3.67969 15.0036 3.17601 14.5 2.55469 14.5C1.93337 14.5 1.42969 15.0036 1.42969 15.625C1.42969 16.2463 1.93337 16.75 2.55469 16.75Z" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
+<path d="M3.67993 15.625H6.07056V11.8281" stroke="#BBBBBB" stroke-width="1.40625" stroke-miterlimit="10"/>
 </svg>
