@@ -202,7 +202,7 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 Expanded(
                     child: Column(
@@ -263,7 +263,7 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 contentPadding: const EdgeInsets.all(12),
-                                hintText: AppLocalizations.of(context)!.walletName,
+                                hintText: AppLocalizations.of(context)!.walletNameHint,
                                 hintStyle: TextStyle(
                                   fontSize: 14,
                                   color: Theme.of(context).colorScheme.surface,
@@ -347,7 +347,7 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                   ],
                 )),
                 const SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -378,6 +378,7 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                                 widget.extra.addAll({
                                   'walletName': _walletNameString,
                                   'mnemonicType': _chosenMnemonicType,
+                                  'isPINConfirmation': false,
                                 });
                                 context.push('/createPinPage', extra: widget.extra);
                               },

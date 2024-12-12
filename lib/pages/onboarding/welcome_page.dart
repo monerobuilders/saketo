@@ -49,9 +49,8 @@ class _WelcomePageState extends State<WelcomePage> {
                                     .startByCreatingWallet,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    color:
-                                    Theme.of(context).colorScheme.tertiary,
+                                  fontSize: 16,
+                                  color: Theme.of(context).colorScheme.tertiary,
                                 )),
                           )
                         ],
@@ -74,19 +73,27 @@ class _WelcomePageState extends State<WelcomePage> {
                               Theme.of(context).colorScheme.secondary,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5))),
-                      child: Text(
-                        AppLocalizations.of(context)!.createAWallet,
-                        style: const TextStyle(fontSize: 16),
+                      child: Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.createAWallet,
+                          style: const TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 32),
                     SizedBox(
                       width: double.infinity,
                       child: Column(children: [
-                        Text(AppLocalizations.of(context)!.alreadyHaveOne,
+                        Center(
+                          child: Text(
+                            AppLocalizations.of(context)!.alreadyHaveOne,
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Theme.of(context).colorScheme.tertiary)),
+                                color: Theme.of(context).colorScheme.tertiary),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                         const SizedBox(height: 16),
                         ElevatedButton(
                             onPressed: () {
@@ -112,6 +119,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             child: Text(
                               AppLocalizations.of(context)!.restore,
                               style: const TextStyle(fontSize: 16),
+                              textAlign: TextAlign.center,
                             )),
                       ]),
                     )

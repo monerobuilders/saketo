@@ -25,5 +25,11 @@
   "mnemonicType": "Mnemonic Type",
   "words": "Words",
   "selectMnemonicType": "Select Mnemonic Type",
-  "createAPin": "CREATE A PIN"
+  "createAPin": "CREATE A PIN",
+  "confirmYourPin": "CONFIRM YOUR PIN",
+  "insertPin": "Insert PIN",
+  "insertPinAgain": "Insert PIN again",
+  "mnemonicReview": "MNEMONIC REVIEW",
+  "writeItDown": "Write it down.",
+  "mnemonicDisplayExplanation": "This is your seed to restore your wallet at a later time, store your seed securely and do not share it with anyone. You won’t be able to access your funds if you lose this seed."
 }
