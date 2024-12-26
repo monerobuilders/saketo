@@ -6,4 +6,8 @@ class MyMoneroMnemonicType implements MnemonicType {
 
   @override
   int get wordCount => 13;
+
+  // TODO: Implement this method when the MyMonero mnemonic generation is implemented
+  @override
+  List<String> generateMnemonic() => throw UnimplementedError();
 }

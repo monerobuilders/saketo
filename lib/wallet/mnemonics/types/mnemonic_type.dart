@@ -6,6 +6,7 @@ import 'mymonero/mymonero_mnemonic_type.dart';
 abstract class MnemonicType {
   String get name;
   int get wordCount;
+  List<String> generateMnemonic();
 
   factory MnemonicType.polyseed() => PolyseedMnemonicType();
   factory MnemonicType.legacy() => LegacyMnemonicType();

@@ -1,3 +1,4 @@
+import '../../../../rust_ffi/rust_ffi.dart';
 import '../mnemonic_type.dart';
 
 class LegacyMnemonicType implements MnemonicType {
@@ -6,4 +7,7 @@ class LegacyMnemonicType implements MnemonicType {
 
   @override
   int get wordCount => 25;
+
+  @override
+  List<String> generateMnemonic() => generateSeedString(MnemonicType.legacy()).split(' ');
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:saketo/wallet/wallet_modes/basic/basic_mode.dart';
 
 import '../../wallet/mnemonics/types/mnemonic_type.dart';
 import '../../wallet/wallet_modes/wallet_mode_abstract.dart';
@@ -18,10 +19,15 @@ class PreviewConfigurationPage extends StatefulWidget {
 
 class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
   String _walletNameString = 'My Main Wallet';
-  MnemonicType _chosenMnemonicType = MnemonicType.polyseed();
+  MnemonicType? _chosenMnemonicType;
 
   @override
   Widget build(BuildContext context) {
+    WalletMode walletMode = widget.extra['walletMode'] as WalletMode;
+    if (walletMode is BasicMode) {
+      // Polyseed is chosen automatically for basic mode
+      _chosenMnemonicType = MnemonicType.polyseed();
+    }
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -277,7 +283,8 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    Container(
+                    walletMode is! BasicMode
+                        ? Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.secondary,
@@ -339,11 +346,12 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                                   dropdownMenuEntries: <DropdownMenuEntry<MnemonicType>>[
                                     DropdownMenuEntry(value: MnemonicType.polyseed(), label: '${MnemonicType.polyseed().name} (${MnemonicType.polyseed().wordCount} ${AppLocalizations.of(context)!.words})'),
                                     DropdownMenuEntry(value: MnemonicType.legacy(), label: '${MnemonicType.legacy().name} (${MnemonicType.legacy().wordCount} ${AppLocalizations.of(context)!.words})'),
-                                    DropdownMenuEntry(value: MnemonicType.mymonero(), label: '${MnemonicType.mymonero().name} (${MnemonicType.mymonero().wordCount} ${AppLocalizations.of(context)!.words})'),
+                                    // DropdownMenuEntry(value: MnemonicType.mymonero(), label: '${MnemonicType.mymonero().name} (${MnemonicType.mymonero().wordCount} ${AppLocalizations.of(context)!.words})'),
+                                    // TODO: MyMonero to be added when it's ready for use in monero-wallet-util
                                   ])
                             ),
                           ],
-                        ))
+                        )) : const SizedBox(),
                   ],
                 )),
                 const SizedBox(
@@ -375,12 +383,21 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                       Expanded(
                           child: ElevatedButton(
                               onPressed: () {
-                                widget.extra.addAll({
-                                  'walletName': _walletNameString,
-                                  'mnemonicType': _chosenMnemonicType,
-                                  'isPINConfirmation': false,
-                                });
-                                context.push('/createPinPage', extra: widget.extra);
+                                if (_chosenMnemonicType == null) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                      duration:
+                                      Duration(seconds: 2),
+                                      content: Text(
+                                          'Please choose a mnemonic type')));
+                                } else {
+                                  widget.extra.addAll({
+                                    'walletName': _walletNameString,
+                                    'mnemonicType': _chosenMnemonicType!,
+                                    'isPINConfirmation': false,
+                                  });
+                                  context.push('/createPinPage', extra: widget.extra);
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                   minimumSize: const Size(double.infinity, 48),

@@ -13,10 +13,9 @@ class MnemonicDisplayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int index = 0;
-    MnemonicType chosenMnemonic = extra['mnemonicType'] as MnemonicType;
-    int wordCount = chosenMnemonic.wordCount;
-    String mnemonic = generateSeedString();
-    print(mnemonic);
+    MnemonicType chosenMnemonicType = extra['mnemonicType'] as MnemonicType;
+    int wordCount = chosenMnemonicType.wordCount;
+    List<String> mnemonicWords = chosenMnemonicType.generateMnemonic();
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -133,72 +132,74 @@ class MnemonicDisplayPage extends StatelessWidget {
               height: 16,
             ),
             Expanded(
-                child: Column(
-              children: [
-                for (int i = index; i < wordCount; i = i + 2)
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: Column(
-                      children: [
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      for (int i = index; i < wordCount; i = i + 2)
                         SizedBox(
                           width: double.infinity,
-                          child: Row(
+                          height: 48,
+                          child: Column(
                             children: [
-                              Expanded(
-                                  child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                  borderRadius: BorderRadius.circular(5),
+                              SizedBox(
+                                width: double.infinity,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                        child: Container(
+                                          padding: const EdgeInsets.all(8),
+                                          decoration: BoxDecoration(
+                                            color:
+                                            Theme.of(context).colorScheme.secondary,
+                                            borderRadius: BorderRadius.circular(5),
+                                          ),
+                                          child: Text(
+                                            '${i + 1}. ${mnemonicWords[i]}',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color:
+                                              Theme.of(context).colorScheme.tertiary,
+                                            ),
+                                          ),
+                                        )),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Expanded(
+                                        child: Container(
+                                          padding: const EdgeInsets.all(8),
+                                          decoration: (((wordCount % 2 != 0) &&
+                                              (i + 1 != wordCount)) ||
+                                              (wordCount % 2 == 0))
+                                              ? BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                              borderRadius: BorderRadius.circular(5))
+                                              : const BoxDecoration(),
+                                          child: (((wordCount % 2 != 0) &&
+                                              (i + 1 != wordCount)) ||
+                                              (wordCount % 2 == 0))
+                                              ? Text(
+                                            "${i + 2}. ${mnemonicWords[i + 1]}",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .tertiary,
+                                            ),
+                                          )
+                                              : null,
+                                        )),
+                                  ],
                                 ),
-                                child: Text(
-                                  '${i + 1}.',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color:
-                                        Theme.of(context).colorScheme.tertiary,
-                                  ),
-                                ),
-                              )),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Expanded(
-                                  child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: (((wordCount % 2 != 0) &&
-                                            (i + 1 != wordCount)) ||
-                                        (wordCount % 2 == 0))
-                                    ? BoxDecoration(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        borderRadius: BorderRadius.circular(5))
-                                    : const BoxDecoration(),
-                                child: (((wordCount % 2 != 0) &&
-                                            (i + 1 != wordCount)) ||
-                                        (wordCount % 2 == 0))
-                                    ? Text(
-                                        "${i + 2}.",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .tertiary,
-                                        ),
-                                      )
-                                    : null,
-                              )),
+                              )
                             ],
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                    ],
                   ),
-              ],
-            )),
+                )),
             const SizedBox(
               height: 16,
             ),

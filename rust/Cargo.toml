@@ -8,4 +8,5 @@ crate-type = ["cdylib"]
 
 [dependencies]
 polyseed = { path = "../external_libs/monero-wallet-util/polyseed" }
+monero-seed = { path = "../external_libs/monero-wallet-util/seed" }
 rand = "0.8.5"
