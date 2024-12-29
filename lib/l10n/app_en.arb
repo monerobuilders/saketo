@@ -16,6 +16,10 @@
   "lightweightDescription": "Connects to a remote server to scan for transactions efficiently.",
   "hardware": "Hardware",
   "hardwareDescription": "Securing your funds by storing your private keys in a seperate secure device.",
+  "business": "Business",
+  "businessDescription": "Tailored for business needing efficient wallet management solutions.",
+  "multisignature": "Multisignature",
+  "multisignatureDescription": "For users who want to split control of their funds between multiple devices.",
   "next": "NEXT",
   "preview": "PREVIEW",
   "configuration": "CONFIGURATION",
@@ -31,5 +35,8 @@
   "insertPinAgain": "Insert PIN again",
   "mnemonicReview": "MNEMONIC REVIEW",
   "writeItDown": "Write it down.",
-  "mnemonicDisplayExplanation": "This is your seed to restore your wallet at a later time, store your seed securely and do not share it with anyone. You won’t be able to access your funds if you lose this seed."
+  "mnemonicDisplayExplanation": "This is your seed to restore your wallet at a later time, store your seed securely and do not share it with anyone. You won’t be able to access your funds if you lose this seed.",
+  "mnemonicConfiguration": "MNEMONIC CONFIGURATION",
+  "mnemonicInputExplanation": "Please enter your mnemonic words in the correct order.",
+  "word": "word"
 }

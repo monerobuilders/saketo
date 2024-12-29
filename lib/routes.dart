@@ -39,7 +39,7 @@ final routerConfig = GoRouter(routes: [
         return MnemonicDisplayPage(extra: state.extra as Map<String, Object>);
       }),
   GoRoute(
-      path: 'mnemonicInputPage',
+      path: '/mnemonicInputPage',
       builder: (context, state) {
         return MnemonicInputPage(extra: state.extra as Map<String, Object>);
       }),

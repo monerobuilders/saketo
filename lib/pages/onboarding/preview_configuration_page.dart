@@ -180,7 +180,7 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                                         fontSize: 12,
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .tertiary,
+                                            .surface,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),

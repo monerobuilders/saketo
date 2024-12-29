@@ -114,648 +114,926 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                     height: 16,
                   ),
                   Expanded(
-                      child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                              child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _selectedMode = WalletMode.basic();
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                  color: _selectedMode is BasicMode
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Theme.of(context).colorScheme.scrim,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _selectedMode = WalletMode.basic();
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(
                                             color: _selectedMode is BasicMode
-                                                ? Theme.of(context)
-                                                    .colorScheme
-                                                    .scrim
-                                                : Theme.of(context)
-                                                    .colorScheme
-                                                    .shadow,
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        padding: const EdgeInsets.all(10),
-                                        height: 40,
-                                        width: 40,
-                                        child: SvgPicture.asset(
-                                          WalletMode.basic().icon,
-                                          colorFilter: ColorFilter.mode(
-                                              _selectedMode is BasicMode
-                                                  ? Theme.of(context)
-                                                      .colorScheme
-                                                      .tertiary
-                                                  : Theme.of(context)
-                                                      .colorScheme
-                                                      .surface,
-                                              BlendMode.srcIn),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 12,
-                                      ),
-                                      Text(
-                                        AppLocalizations.of(context)!.basic,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .tertiary,
-                                          fontSize: 14,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  Text(
-                                    AppLocalizations.of(context)!
-                                        .basicDescription,
-                                    style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  SizedBox(
-                                      width: double.infinity,
-                                      height: 24,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            width: 24,
-                                            height: 24,
-                                            decoration: BoxDecoration(
-                                              color: _selectedMode is BasicMode
-                                                  ? Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary
-                                                  : Theme.of(context)
-                                                      .colorScheme
-                                                      .scrim,
-                                              border: Border.all(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .tertiary,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                            ),
-                                            child: Center(
-                                              child: Visibility(
-                                                  visible: _selectedMode is BasicMode,
-                                                  child: Container(
-                                                    width: 14,
-                                                    height: 14,
-                                                    decoration: BoxDecoration(
-                                                      color: Theme.of(context)
+                                                ? Theme.of(context).colorScheme.secondary
+                                                : Theme.of(context).colorScheme.scrim,
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: _selectedMode is BasicMode
+                                                          ? Theme.of(context)
                                                           .colorScheme
-                                                          .tertiary,
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                  )),
+                                                          .scrim
+                                                          : Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  padding: const EdgeInsets.all(10),
+                                                  height: 40,
+                                                  width: 40,
+                                                  child: SvgPicture.asset(
+                                                    WalletMode.basic().icon,
+                                                    colorFilter: ColorFilter.mode(
+                                                        _selectedMode is BasicMode
+                                                            ? Theme.of(context)
+                                                            .colorScheme
+                                                            .tertiary
+                                                            : Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        BlendMode.srcIn),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Text(
+                                                  AppLocalizations.of(context)!.basic,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .tertiary,
+                                                    fontSize: 14,
+                                                    fontWeight: _selectedMode is BasicMode
+                                                        ? FontWeight.bold
+                                                        : FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                          )
-                                        ],
-                                      ))
-                                ],
-                              ),
-                            ),
-                          )),
-                          const SizedBox(width: 12),
-                          Expanded(
-                              child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _selectedMode = WalletMode.advanced();
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                  color: _selectedMode is AdvancedMode
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Theme.of(context).colorScheme.scrim,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .basicDescription,
+                                              style: TextStyle(
+                                                color:
+                                                Theme.of(context).colorScheme.surface,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            SizedBox(
+                                                width: double.infinity,
+                                                height: 24,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                                  children: [
+                                                    Container(
+                                                      width: 24,
+                                                      height: 24,
+                                                      decoration: BoxDecoration(
+                                                        color: _selectedMode is BasicMode
+                                                            ? Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary
+                                                            : Theme.of(context)
+                                                            .colorScheme
+                                                            .scrim,
+                                                        border: Border.all(
+                                                          color: Theme.of(context)
+                                                              .colorScheme
+                                                              .tertiary,
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(30),
+                                                      ),
+                                                      child: Center(
+                                                        child: Visibility(
+                                                            visible: _selectedMode is BasicMode,
+                                                            child: Container(
+                                                              width: 14,
+                                                              height: 14,
+                                                              decoration: BoxDecoration(
+                                                                color: Theme.of(context)
+                                                                    .colorScheme
+                                                                    .tertiary,
+                                                                shape: BoxShape.circle,
+                                                              ),
+                                                            )),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ))
+                                          ],
+                                        ),
+                                      ),
+                                    )),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _selectedMode = WalletMode.advanced();
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(
                                             color: _selectedMode is AdvancedMode
-                                                ? Theme.of(context)
-                                                    .colorScheme
-                                                    .scrim
-                                                : Theme.of(context)
-                                                    .colorScheme
-                                                    .shadow,
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        padding: const EdgeInsets.all(10),
-                                        height: 40,
-                                        width: 40,
-                                        child: SvgPicture.asset(
-                                          WalletMode.advanced().icon,
-                                          colorFilter: ColorFilter.mode(
-                                              _selectedMode is AdvancedMode
-                                                  ? Theme.of(context)
-                                                      .colorScheme
-                                                      .tertiary
-                                                  : Theme.of(context)
-                                                      .colorScheme
-                                                      .surface,
-                                              BlendMode.srcIn),
+                                                ? Theme.of(context).colorScheme.secondary
+                                                : Theme.of(context).colorScheme.scrim,
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: _selectedMode is AdvancedMode
+                                                          ? Theme.of(context)
+                                                          .colorScheme
+                                                          .scrim
+                                                          : Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  padding: const EdgeInsets.all(10),
+                                                  height: 40,
+                                                  width: 40,
+                                                  child: SvgPicture.asset(
+                                                    WalletMode.advanced().icon,
+                                                    colorFilter: ColorFilter.mode(
+                                                        _selectedMode is AdvancedMode
+                                                            ? Theme.of(context)
+                                                            .colorScheme
+                                                            .tertiary
+                                                            : Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        BlendMode.srcIn),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Text(
+                                                  AppLocalizations.of(context)!.advanced,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .tertiary,
+                                                    fontSize: 14,
+                                                    fontWeight: _selectedMode is AdvancedMode
+                                                        ? FontWeight.bold
+                                                        : FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .advancedDescription,
+                                              style: TextStyle(
+                                                color:
+                                                Theme.of(context).colorScheme.surface,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            SizedBox(
+                                                width: double.infinity,
+                                                height: 24,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                                  children: [
+                                                    Container(
+                                                      width: 24,
+                                                      height: 24,
+                                                      decoration: BoxDecoration(
+                                                        color: _selectedMode is AdvancedMode
+                                                            ? Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary
+                                                            : Theme.of(context)
+                                                            .colorScheme
+                                                            .scrim,
+                                                        border: Border.all(
+                                                          color: Theme.of(context)
+                                                              .colorScheme
+                                                              .tertiary,
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius.circular(30),
+                                                      ),
+                                                      child: Center(
+                                                        child: Visibility(
+                                                            visible: _selectedMode is AdvancedMode,
+                                                            child: Container(
+                                                              width: 14,
+                                                              height: 14,
+                                                              decoration: BoxDecoration(
+                                                                color: Theme.of(context)
+                                                                    .colorScheme
+                                                                    .tertiary,
+                                                                shape: BoxShape.circle,
+                                                              ),
+                                                            )),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ))
+                                          ],
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 12,
-                                      ),
-                                      Text(
-                                        AppLocalizations.of(context)!.advanced,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .tertiary,
-                                          fontSize: 14,
+                                    )),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _selectedMode = WalletMode.paranoia();
+                                });
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                    color: _selectedMode is ParanoiaMode
+                                        ? Theme.of(context).colorScheme.secondary
+                                        : Theme.of(context).colorScheme.scrim,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: _selectedMode is ParanoiaMode
+                                                          ? Theme.of(context)
+                                                          .colorScheme
+                                                          .scrim
+                                                          : Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  padding: const EdgeInsets.all(10),
+                                                  height: 40,
+                                                  width: 40,
+                                                  child: SvgPicture.asset(
+                                                    WalletMode.paranoia().icon,
+                                                    colorFilter: ColorFilter.mode(
+                                                        _selectedMode is ParanoiaMode
+                                                            ? Theme.of(context)
+                                                            .colorScheme
+                                                            .tertiary
+                                                            : Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        BlendMode.srcIn),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Text(
+                                                  AppLocalizations.of(context)!
+                                                      .paranoia,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .tertiary,
+                                                    fontSize: 14,
+                                                    fontWeight: _selectedMode is ParanoiaMode
+                                                        ? FontWeight.bold
+                                                        : FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .paranoiaDescription,
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .surface,
+                                                fontSize: 12,
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  Text(
-                                    AppLocalizations.of(context)!
-                                        .advancedDescription,
-                                    style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      fontSize: 12,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  SizedBox(
-                                      width: double.infinity,
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    Container(
+                                      width: 24,
                                       height: 24,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            width: 24,
-                                            height: 24,
-                                            decoration: BoxDecoration(
-                                              color: _selectedMode is AdvancedMode
-                                                  ? Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary
-                                                  : Theme.of(context)
-                                                      .colorScheme
-                                                      .scrim,
-                                              border: Border.all(
+                                      decoration: BoxDecoration(
+                                        color: _selectedMode is ParanoiaMode
+                                            ? Theme.of(context).colorScheme.secondary
+                                            : Theme.of(context).colorScheme.scrim,
+                                        border: Border.all(
+                                          color:
+                                          Theme.of(context).colorScheme.tertiary,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Center(
+                                        child: Visibility(
+                                            visible:
+                                            _selectedMode is ParanoiaMode,
+                                            child: Container(
+                                              width: 14,
+                                              height: 14,
+                                              decoration: BoxDecoration(
                                                 color: Theme.of(context)
                                                     .colorScheme
                                                     .tertiary,
-                                                width: 1,
+                                                shape: BoxShape.circle,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                            ),
-                                            child: Center(
-                                              child: Visibility(
-                                                  visible: _selectedMode is AdvancedMode,
-                                                  child: Container(
-                                                    width: 14,
-                                                    height: 14,
-                                                    decoration: BoxDecoration(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .tertiary,
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                  )),
-                                            ),
-                                          )
-                                        ],
-                                      ))
-                                ],
+                                            )),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                          )),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _selectedMode = WalletMode.paranoia();
-                          });
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              color: _selectedMode is ParanoiaMode
-                                  ? Theme.of(context).colorScheme.secondary
-                                  : Theme.of(context).colorScheme.scrim,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: _selectedMode is ParanoiaMode
-                                                    ? Theme.of(context)
-                                                        .colorScheme
-                                                        .scrim
-                                                    : Theme.of(context)
-                                                        .colorScheme
-                                                        .shadow,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            padding: const EdgeInsets.all(10),
-                                            height: 40,
-                                            width: 40,
-                                            child: SvgPicture.asset(
-                                              WalletMode.paranoia().icon,
-                                              colorFilter: ColorFilter.mode(
-                                                  _selectedMode is ParanoiaMode
-                                                      ? Theme.of(context)
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // TODO: Handle when lightweight mode is implemented
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.shadow,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
                                                           .colorScheme
-                                                          .tertiary
-                                                      : Theme.of(context)
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  padding: const EdgeInsets.all(10),
+                                                  height: 40,
+                                                  width: 40,
+                                                  child: SvgPicture.asset(
+                                                    WalletMode.lightweight().icon,
+                                                    colorFilter: ColorFilter.mode(
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        BlendMode.srcIn),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
                                                           .colorScheme
-                                                          .surface,
-                                                  BlendMode.srcIn),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            AppLocalizations.of(context)!
-                                                .paranoia,
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .tertiary,
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .paranoiaDescription,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .surface,
-                                          fontSize: 12,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              Container(
-                                width: 24,
-                                height: 24,
-                                decoration: BoxDecoration(
-                                  color: _selectedMode is ParanoiaMode
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Theme.of(context).colorScheme.scrim,
-                                  border: Border.all(
-                                    color:
-                                        Theme.of(context).colorScheme.tertiary,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Center(
-                                  child: Visibility(
-                                      visible:
-                                      _selectedMode is ParanoiaMode,
-                                      child: Container(
-                                        width: 14,
-                                        height: 14,
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .tertiary,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      )),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // TODO: Handle when lightweight mode is implemented
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.shadow,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .shadow,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            padding: const EdgeInsets.all(10),
-                                            height: 40,
-                                            width: 40,
-                                            child: SvgPicture.asset(
-                                              WalletMode.lightweight().icon,
-                                              colorFilter: ColorFilter.mode(
-                                                  Theme.of(context)
-                                                      .colorScheme
-                                                      .surface,
-                                                  BlendMode.srcIn),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 12,
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .shadow,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            height: 40,
-                                            width: 60,
-                                            child: Center(
-                                              child: Text(
-                                                AppLocalizations.of(context)!
-                                                    .soon,
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .surface,
-                                                  fontSize: 14,
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  height: 40,
+                                                  width: 60,
+                                                  child: Center(
+                                                    child: Text(
+                                                      AppLocalizations.of(context)!
+                                                          .soon,
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            AppLocalizations.of(context)!
-                                                .lightweight,
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .surface,
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .lightweightDescription,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .surface,
-                                          fontSize: 12,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              Container(
-                                width: 24,
-                                height: 24,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.shadow,
-                                  border: Border.all(
-                                    color:
-                                        Theme.of(context).colorScheme.tertiary,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Center(
-                                  child: Visibility(
-                                      visible: false,
-                                      child: Container(
-                                        width: 14,
-                                        height: 14,
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .tertiary,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      )),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // TODO: Handle when hardware mode is implemented
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.shadow,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .shadow,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            padding: const EdgeInsets.all(10),
-                                            height: 40,
-                                            width: 40,
-                                            child: SvgPicture.asset(
-                                              WalletMode.hardware().icon,
-                                              colorFilter: ColorFilter.mode(
-                                                  Theme.of(context)
-                                                      .colorScheme
-                                                      .surface,
-                                                  BlendMode.srcIn),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 12,
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .shadow,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            height: 40,
-                                            width: 60,
-                                            child: Center(
-                                              child: Text(
-                                                AppLocalizations.of(context)!
-                                                    .soon,
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .surface,
-                                                  fontSize: 14,
+                                                const SizedBox(
+                                                  width: 12,
                                                 ),
+                                                Text(
+                                                  AppLocalizations.of(context)!
+                                                      .lightweight,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .surface,
+                                                    fontSize: 14,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .lightweightDescription,
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .surface,
+                                                fontSize: 12,
                                               ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            AppLocalizations.of(context)!
-                                                .hardware,
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .surface,
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .hardwareDescription,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .surface,
-                                          fontSize: 12,
+                                            )
+                                          ],
                                         ),
-                                      )
-                                    ],
-                                  ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).colorScheme.shadow,
+                                        border: Border.all(
+                                          color:
+                                          Theme.of(context).colorScheme.tertiary,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Center(
+                                        child: Visibility(
+                                            visible: false,
+                                            child: Container(
+                                              width: 14,
+                                              height: 14,
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            )),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              Container(
-                                width: 24,
-                                height: 24,
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // TODO: Handle when hardware mode is implemented
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFF4A4A4A),
-                                  border: Border.all(
-                                    color:
-                                        Theme.of(context).colorScheme.tertiary,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Center(
-                                  child: Visibility(
-                                      visible: false,
+                                    color: Theme.of(context).colorScheme.shadow,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
                                       child: Container(
-                                        width: 14,
-                                        height: 14,
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .tertiary,
-                                          shape: BoxShape.circle,
+                                        padding: const EdgeInsets.all(6),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  padding: const EdgeInsets.all(10),
+                                                  height: 40,
+                                                  width: 40,
+                                                  child: SvgPicture.asset(
+                                                    WalletMode.hardware().icon,
+                                                    colorFilter: ColorFilter.mode(
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        BlendMode.srcIn),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  height: 40,
+                                                  width: 60,
+                                                  child: Center(
+                                                    child: Text(
+                                                      AppLocalizations.of(context)!
+                                                          .soon,
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Text(
+                                                  AppLocalizations.of(context)!
+                                                      .hardware,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .surface,
+                                                    fontSize: 14,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .hardwareDescription,
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .surface,
+                                                fontSize: 12,
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                      )),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF4A4A4A),
+                                        border: Border.all(
+                                          color:
+                                          Theme.of(context).colorScheme.tertiary,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Center(
+                                        child: Visibility(
+                                            visible: false,
+                                            child: Container(
+                                              width: 14,
+                                              height: 14,
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            )),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // TODO: Handle when business mode is implemented
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.shadow,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  padding: const EdgeInsets.all(10),
+                                                  height: 40,
+                                                  width: 40,
+                                                  child: SvgPicture.asset(
+                                                    WalletMode.business().icon,
+                                                    colorFilter: ColorFilter.mode(
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        BlendMode.srcIn),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  height: 40,
+                                                  width: 60,
+                                                  child: Center(
+                                                    child: Text(
+                                                      AppLocalizations.of(context)!
+                                                          .soon,
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Text(
+                                                  AppLocalizations.of(context)!
+                                                      .business,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .surface,
+                                                    fontSize: 14,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .businessDescription,
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .surface,
+                                                fontSize: 12,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF4A4A4A),
+                                        border: Border.all(
+                                          color:
+                                          Theme.of(context).colorScheme.tertiary,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Center(
+                                        child: Visibility(
+                                            visible: false,
+                                            child: Container(
+                                              width: 14,
+                                              height: 14,
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            )),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // TODO: Handle when Multisignature mode is implemented
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.shadow,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  padding: const EdgeInsets.all(10),
+                                                  height: 40,
+                                                  width: 40,
+                                                  child: SvgPicture.asset(
+                                                    WalletMode.multisignature().icon,
+                                                    colorFilter: ColorFilter.mode(
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        BlendMode.srcIn),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .shadow,
+                                                      borderRadius:
+                                                      BorderRadius.circular(5)),
+                                                  height: 40,
+                                                  width: 60,
+                                                  child: Center(
+                                                    child: Text(
+                                                      AppLocalizations.of(context)!
+                                                          .soon,
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .surface,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                Text(
+                                                  AppLocalizations.of(context)!
+                                                      .multisignature,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .surface,
+                                                    fontSize: 14,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .multisignatureDescription,
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .surface,
+                                                fontSize: 12,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF4A4A4A),
+                                        border: Border.all(
+                                          color:
+                                          Theme.of(context).colorScheme.tertiary,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Center(
+                                        child: Visibility(
+                                            visible: false,
+                                            child: Container(
+                                              width: 14,
+                                              height: 14,
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            )),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  )),
+                      )
+                  ),
                   const SizedBox(
                     height: 16,
                   ),

@@ -28,8 +28,9 @@ class Saketo extends StatelessWidget {
             tertiary: const Color(0xFFF0F0F0), // New Smoke
             surface: const Color(0xFFBBBBBB), // New Dark Text
             scrim: const Color(0xFF323232), // Greyish
-            shadow: const Color(0x1AB3B3B3) // Simple Background
-            ),
+            shadow: const Color(0x1AB3B3B3), // Simple Background
+            outline: const Color(0xFF888888), // Hint
+        ),
         useMaterial3: true,
       ),
       localizationsDelegates: const [

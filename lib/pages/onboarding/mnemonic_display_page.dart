@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:saketo/rust_ffi/rust_ffi.dart';
 import 'package:saketo/wallet/mnemonics/types/mnemonic_type.dart';
 
 class MnemonicDisplayPage extends StatelessWidget {
@@ -133,73 +132,95 @@ class MnemonicDisplayPage extends StatelessWidget {
             ),
             Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      for (int i = index; i < wordCount; i = i + 2)
-                        SizedBox(
-                          width: double.infinity,
-                          height: 48,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: Container(
-                                          padding: const EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                            color:
-                                            Theme.of(context).colorScheme.secondary,
-                                            borderRadius: BorderRadius.circular(5),
-                                          ),
-                                          child: Text(
-                                            '${i + 1}. ${mnemonicWords[i]}',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color:
-                                              Theme.of(context).colorScheme.tertiary,
-                                            ),
-                                          ),
-                                        )),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Expanded(
-                                        child: Container(
-                                          padding: const EdgeInsets.all(8),
-                                          decoration: (((wordCount % 2 != 0) &&
-                                              (i + 1 != wordCount)) ||
-                                              (wordCount % 2 == 0))
-                                              ? BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary,
-                                              borderRadius: BorderRadius.circular(5))
-                                              : const BoxDecoration(),
-                                          child: (((wordCount % 2 != 0) &&
-                                              (i + 1 != wordCount)) ||
-                                              (wordCount % 2 == 0))
-                                              ? Text(
-                                            "${i + 2}. ${mnemonicWords[i + 1]}",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .tertiary,
-                                            ),
-                                          )
-                                              : null,
-                                        )),
-                                  ],
+              child: Column(
+                children: [
+                  for (int i = index; i < wordCount; i = i + 2)
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Container(
+                                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondary,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 32,
+                                  child: Text(
+                                    "${i + 1}.",
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Theme.of(context).colorScheme.surface,
+                                  ),
+                                )),
+                                const SizedBox(
+                                  width: 4,
                                 ),
-                              )
-                            ],
+                                Expanded(child: Text(mnemonicWords[i],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Theme.of(context).colorScheme.tertiary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )),
+                              ],
+                            )
+                            )),
+                          const SizedBox(
+                            width: 8,
                           ),
-                        ),
-                    ],
-                  ),
-                )),
+                          Expanded(
+                              child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                            decoration: (((wordCount % 2 != 0) &&
+                                        (i + 1 != wordCount)) ||
+                                    (wordCount % 2 == 0))
+                                ? BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                    borderRadius: BorderRadius.circular(5))
+                                : const BoxDecoration(),
+                            child: (((wordCount % 2 != 0) &&
+                                        (i + 1 != wordCount)) ||
+                                    (wordCount % 2 == 0))
+                                ?  Row(
+                              children: [
+                                SizedBox(
+                                    width: 32,
+                                    child: Text(
+                                      "${i + 2}.",
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Theme.of(context).colorScheme.surface,
+                                      ),
+                                    )),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Expanded(child: Text(mnemonicWords[i + 1],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Theme.of(context).colorScheme.tertiary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )),
+                              ],
+                            )
+                                : null,
+                          )),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+            )),
             const SizedBox(
               height: 16,
             ),
