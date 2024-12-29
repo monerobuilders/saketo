@@ -7,6 +7,7 @@ abstract class MnemonicType {
   String get name;
   int get wordCount;
   List<String> generateMnemonic();
+  (bool, String) isValidMnemonic(String mnemonic, String languageCode);
 
   factory MnemonicType.polyseed() => PolyseedMnemonicType();
   factory MnemonicType.legacy() => LegacyMnemonicType();

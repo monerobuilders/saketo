@@ -342,7 +342,6 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                                   ),
                                   width: double.infinity,
                                   hintText: AppLocalizations.of(context)!.selectMnemonicType,
-                                  initialSelection: MnemonicType.polyseed(),
                                   dropdownMenuEntries: <DropdownMenuEntry<MnemonicType>>[
                                     DropdownMenuEntry(value: MnemonicType.polyseed(), label: '${MnemonicType.polyseed().name} (${MnemonicType.polyseed().wordCount} ${AppLocalizations.of(context)!.words})'),
                                     DropdownMenuEntry(value: MnemonicType.legacy(), label: '${MnemonicType.legacy().name} (${MnemonicType.legacy().wordCount} ${AppLocalizations.of(context)!.words})'),
@@ -385,11 +384,12 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                               onPressed: () {
                                 if (_chosenMnemonicType == null) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
+                                      .showSnackBar(SnackBar(
                                       duration:
-                                      Duration(seconds: 2),
+                                      const Duration(seconds: 2),
                                       content: Text(
-                                          'Please choose a mnemonic type')));
+                                          AppLocalizations.of(context)!
+                                              .chooseAMnemonicType)));
                                 } else {
                                   widget.extra.addAll({
                                     'walletName': _walletNameString,

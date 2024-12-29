@@ -38,5 +38,8 @@
   "mnemonicDisplayExplanation": "This is your seed to restore your wallet at a later time, store your seed securely and do not share it with anyone. You won’t be able to access your funds if you lose this seed.",
   "mnemonicConfiguration": "MNEMONIC CONFIGURATION",
   "mnemonicInputExplanation": "Please enter your mnemonic words in the correct order.",
-  "word": "word"
+  "word": "word",
+  "fillAllPin": "Please fill all PIN.",
+  "pinDontMatch": "PINs don't match, please try again.",
+  "chooseAMnemonicType": "Please choose a mnemonic type."
 }

@@ -11,4 +11,7 @@ class PolyseedMnemonicType implements MnemonicType {
 
   @override
   List<String> generateMnemonic() => generateSeedString(MnemonicType.polyseed()).split(' ');
+
+  @override
+  (bool, String) isValidMnemonic(String mnemonic, String languageCode) => checkIsValidMnemonic(MnemonicType.polyseed(), mnemonic, languageCode);
 }

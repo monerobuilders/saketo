@@ -627,10 +627,11 @@ class _CreatePinPageState extends State<CreatePinPage> {
                                         true) {
                                       if (pin.contains(-1)) {
                                         ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                duration: Duration(seconds: 2),
+                                            .showSnackBar(SnackBar(
+                                                duration: const Duration(seconds: 2),
                                                 content: Text(
-                                                    'Please fill all PIN')));
+                                                    AppLocalizations.of(context)!
+                                                        .fillAllPin)));
                                       } else {
                                         if (widget.extra['pin'] == pin.join()) {
                                           if (widget.extra['isCreateWallet'] == true) {
@@ -642,20 +643,22 @@ class _CreatePinPageState extends State<CreatePinPage> {
                                           }
                                         } else {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
+                                              .showSnackBar(SnackBar(
                                                   duration:
-                                                      Duration(seconds: 2),
+                                                      const Duration(seconds: 2),
                                                   content: Text(
-                                                      'PIN Mismatch, please try again')));
+                                                      AppLocalizations.of(context)!
+                                                          .pinDontMatch)));
                                         }
                                       }
                                     } else {
                                       if (pin.contains(-1)) {
                                         ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                duration: Duration(seconds: 2),
+                                            .showSnackBar(SnackBar(
+                                                duration: const Duration(seconds: 2),
                                                 content: Text(
-                                                    'Please fill all PIN')));
+                                                    AppLocalizations.of(context)!
+                                                        .fillAllPin)));
                                       } else {
                                         widget.extra.addAll({
                                           'pin': pin.join(),

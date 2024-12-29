@@ -10,4 +10,8 @@ class LegacyMnemonicType implements MnemonicType {
 
   @override
   List<String> generateMnemonic() => generateSeedString(MnemonicType.legacy()).split(' ');
+
+  // TODO: Implement this method when the Legacy mnemonic validation is implemented
+  @override
+  (bool, String) isValidMnemonic(String mnemonic, String languageCode) => checkIsValidMnemonic(MnemonicType.legacy(), mnemonic, languageCode);
 }

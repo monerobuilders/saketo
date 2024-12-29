@@ -17,11 +17,12 @@ class MnemonicInputPage extends StatefulWidget {
 class _MnemonicInputPageState extends State<MnemonicInputPage> {
   late List<String> mnemonicWords;
   late int wordCount;
+  late MnemonicType chosenMnemonicType;
 
   @override
   void initState() {
     super.initState();
-    MnemonicType chosenMnemonicType = widget.extra['mnemonicType'] as MnemonicType;
+    chosenMnemonicType = widget.extra['mnemonicType'] as MnemonicType;
     wordCount = chosenMnemonicType.wordCount;
     mnemonicWords = List.filled(wordCount, '');
   }
@@ -146,7 +147,8 @@ class _MnemonicInputPageState extends State<MnemonicInputPage> {
                           Expanded(
                               child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 4),
                             alignment: Alignment.centerLeft,
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.secondary,
@@ -176,21 +178,28 @@ class _MnemonicInputPageState extends State<MnemonicInputPage> {
                                 ),
                                 Expanded(
                                     child: TextField(
-                                      onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          mnemonicWords[i] = value;
-                                        });
-                                      },
-                                      cursorColor: Theme.of(context).colorScheme.tertiary,
-                                      maxLength: 12,
-                                      buildCounter: (BuildContext context, {required int currentLength, required bool isFocused, required int? maxLength}) => null,
-                                      decoration: InputDecoration(
-                                    hintText: AppLocalizations.of(context)!.word,
+                                  onTapOutside: (event) =>
+                                      FocusScope.of(context).unfocus(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      mnemonicWords[i] = value;
+                                    });
+                                  },
+                                  cursorColor:
+                                      Theme.of(context).colorScheme.tertiary,
+                                  maxLength: 12,
+                                  buildCounter: (BuildContext context,
+                                          {required int currentLength,
+                                          required bool isFocused,
+                                          required int? maxLength}) =>
+                                      null,
+                                  decoration: InputDecoration(
+                                    hintText:
+                                        AppLocalizations.of(context)!.word,
                                     hintStyle: TextStyle(
                                       fontSize: 16,
-                                      color: Theme.of(context)
-                                          .colorScheme.outline,
+                                      color:
+                                          Theme.of(context).colorScheme.outline,
                                     ),
                                     border: InputBorder.none,
                                   ),
@@ -208,8 +217,9 @@ class _MnemonicInputPageState extends State<MnemonicInputPage> {
                           ),
                           Expanded(
                               child: Container(
-                                margin: const EdgeInsets.symmetric(vertical: 4),
-                                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                            margin: const EdgeInsets.symmetric(vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 4),
                             decoration: (((wordCount % 2 != 0) &&
                                         (i + 1 != wordCount)) ||
                                     (wordCount % 2 == 0))
@@ -222,55 +232,66 @@ class _MnemonicInputPageState extends State<MnemonicInputPage> {
                                         (i + 1 != wordCount)) ||
                                     (wordCount % 2 == 0))
                                 ? Row(
-                              children: [
-                                SizedBox(
-                                  width: 32,
-                                  child: TextField(
-                                    textAlign: TextAlign.right,
-                                    decoration: InputDecoration(
-                                      hintText: "${i + 2}.",
-                                      hintStyle: TextStyle(
-                                        fontSize: 16,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .surface,
+                                    children: [
+                                      SizedBox(
+                                        width: 32,
+                                        child: TextField(
+                                          textAlign: TextAlign.right,
+                                          decoration: InputDecoration(
+                                            hintText: "${i + 2}.",
+                                            hintStyle: TextStyle(
+                                              fontSize: 16,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .surface,
+                                            ),
+                                            border: InputBorder.none,
+                                          ),
+                                          enabled: false,
+                                        ),
                                       ),
-                                      border: InputBorder.none,
-                                    ),
-                                    enabled: false,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Expanded(
-                                    child: TextField(
-                                      onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          mnemonicWords[i + 1] = value;
-                                        });
-                                      },
-                                      cursorColor: Theme.of(context).colorScheme.tertiary,
-                                      maxLength: 12,
-                                      buildCounter: (BuildContext context, {required int currentLength, required bool isFocused, required int? maxLength}) => null,
-                                      decoration: InputDecoration(
-                                        hintText: AppLocalizations.of(context)!.word,
-                                        hintStyle: TextStyle(
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Expanded(
+                                          child: TextField(
+                                        onTapOutside: (event) =>
+                                            FocusScope.of(context).unfocus(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            mnemonicWords[i + 1] = value;
+                                          });
+                                        },
+                                        cursorColor: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
+                                        maxLength: 12,
+                                        buildCounter: (BuildContext context,
+                                                {required int currentLength,
+                                                required bool isFocused,
+                                                required int? maxLength}) =>
+                                            null,
+                                        decoration: InputDecoration(
+                                          hintText:
+                                              AppLocalizations.of(context)!
+                                                  .word,
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outline,
+                                          ),
+                                          border: InputBorder.none,
+                                        ),
+                                        style: TextStyle(
                                           fontSize: 16,
                                           color: Theme.of(context)
-                                              .colorScheme.outline,
+                                              .colorScheme
+                                              .tertiary,
                                         ),
-                                        border: InputBorder.none,
-                                      ),
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color:
-                                        Theme.of(context).colorScheme.tertiary,
-                                      ),
-                                    ))
-                              ],
-                            )
+                                      ))
+                                    ],
+                                  )
                                 : null,
                           )),
                         ],
@@ -307,7 +328,30 @@ class _MnemonicInputPageState extends State<MnemonicInputPage> {
                   ),
                   Expanded(
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (mnemonicWords.contains("")) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      duration: Duration(seconds: 2),
+                                      content:
+                                          Text("Please fill all the words.")));
+                            } else {
+                              // TODO: Make mnemonic language dynamic
+                              final result = chosenMnemonicType.isValidMnemonic(
+                                  mnemonicWords.join(" "), "en");
+                              if (!result.$1) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        duration: const Duration(seconds: 2),
+                                        content: Text(result.$2)));
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text("Valid mnemonic"),
+                                ));
+                              }
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(double.infinity, 48),
                               foregroundColor:

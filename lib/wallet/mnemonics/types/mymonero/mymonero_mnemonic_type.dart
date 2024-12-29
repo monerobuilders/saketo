@@ -10,4 +10,8 @@ class MyMoneroMnemonicType implements MnemonicType {
   // TODO: Implement this method when the MyMonero mnemonic generation is implemented
   @override
   List<String> generateMnemonic() => throw UnimplementedError();
+
+  // TODO: Implement this method when the MyMonero mnemonic validation is implemented
+  @override
+  (bool, String) isValidMnemonic(String mnemonic, String languageCode) => throw UnimplementedError();
 }
