@@ -61,7 +61,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       onPressed: () {
                         context.push('/modeSelectionPage',
                             extra: Map<String, Object>.from({
-                              'isNewWallet': true,
+                              'isFirstTime': true,
                               'isCreateWallet': true,
                             }));
                       },
@@ -99,7 +99,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             onPressed: () {
                               context.push('/modeSelectionPage',
                                   extra: Map<String, Object>.from({
-                                    'isNewWallet': true,
+                                    'isFirstTime': true,
                                     'isCreateWallet': false,
                                   }));
                             },

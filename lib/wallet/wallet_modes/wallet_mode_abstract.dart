@@ -18,4 +18,25 @@ abstract class WalletMode {
   factory WalletMode.hardware() => HardwareMode();
   factory WalletMode.business() => BusinessMode();
   factory WalletMode.multisignature() => MultisignatureMode();
+
+  factory WalletMode.fromName(String name) {
+    switch (name) {
+      case 'Basic':
+        return WalletMode.basic();
+      case 'Lightweight':
+        return WalletMode.lightweight();
+      case 'Advanced':
+        return WalletMode.advanced();
+      case 'Paranoia':
+        return WalletMode.paranoia();
+      case 'Hardware':
+        return WalletMode.hardware();
+      case 'Business':
+        return WalletMode.business();
+      case 'Multisignature':
+        return WalletMode.multisignature();
+      default:
+        throw Exception('Unknown wallet mode: $name');
+    }
+  }
 }

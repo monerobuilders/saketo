@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:saketo/db/objectbox.g.dart';
+import 'package:saketo/main.dart';
 import 'package:saketo/wallet/mnemonics/types/mnemonic_type.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
+import '../../wallet/wallet.dart';
+import '../../wallet/wallet_modes/wallet_mode_abstract.dart';
 
 class MnemonicDisplayPage extends StatelessWidget {
   final Map<String, Object> extra;
@@ -39,16 +46,6 @@ class MnemonicDisplayPage extends StatelessWidget {
                               color: Theme.of(context).colorScheme.tertiary,
                               borderRadius: BorderRadius.circular(32)),
                         )),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Expanded(
-                            child: Container(
-                                height: 6,
-                                decoration: BoxDecoration(
-                                    color:
-                                        Theme.of(context).colorScheme.tertiary,
-                                    borderRadius: BorderRadius.circular(32)))),
                         const SizedBox(
                           width: 8,
                         ),
@@ -142,42 +139,50 @@ class MnemonicDisplayPage extends StatelessWidget {
                         children: [
                           Expanded(
                               child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 32,
-                                  child: Text(
-                                    "${i + 1}.",
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Theme.of(context).colorScheme.surface,
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 4),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                    borderRadius: BorderRadius.circular(5),
                                   ),
-                                )),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Expanded(child: Text(mnemonicWords[i],
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Theme.of(context).colorScheme.tertiary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )),
-                              ],
-                            )
-                            )),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                          width: 32,
+                                          child: Text(
+                                            "${i + 1}.",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .surface,
+                                            ),
+                                          )),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Expanded(
+                                          child: Text(
+                                        mnemonicWords[i],
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )),
+                                    ],
+                                  ))),
                           const SizedBox(
                             width: 8,
                           ),
                           Expanded(
                               child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 4),
                             decoration: (((wordCount % 2 != 0) &&
                                         (i + 1 != wordCount)) ||
                                     (wordCount % 2 == 0))
@@ -189,30 +194,36 @@ class MnemonicDisplayPage extends StatelessWidget {
                             child: (((wordCount % 2 != 0) &&
                                         (i + 1 != wordCount)) ||
                                     (wordCount % 2 == 0))
-                                ?  Row(
-                              children: [
-                                SizedBox(
-                                    width: 32,
-                                    child: Text(
-                                      "${i + 2}.",
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Theme.of(context).colorScheme.surface,
+                                ? Row(
+                                    children: [
+                                      SizedBox(
+                                          width: 32,
+                                          child: Text(
+                                            "${i + 2}.",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .surface,
+                                            ),
+                                          )),
+                                      const SizedBox(
+                                        width: 4,
                                       ),
-                                    )),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Expanded(child: Text(mnemonicWords[i + 1],
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Theme.of(context).colorScheme.tertiary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )),
-                              ],
-                            )
+                                      Expanded(
+                                          child: Text(
+                                        mnemonicWords[i + 1],
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )),
+                                    ],
+                                  )
                                 : null,
                           )),
                         ],
@@ -249,7 +260,19 @@ class MnemonicDisplayPage extends StatelessWidget {
                   ),
                   Expanded(
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final internalId = const Uuid().v4();
+                            objectbox.store.box<Wallet>().put(Wallet(
+                              internalId: internalId,
+                              name: extra['walletName'] as String,
+                              modeName: (extra['walletMode'] as WalletMode).name,
+                            ));
+                            final sharedPrefs = await SharedPreferences.getInstance();
+                            sharedPrefs.setBool("is_initialized", true);
+                            if (context.mounted) {
+                              context.push('/mainWalletPage', extra: extra);
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(double.infinity, 48),
                               foregroundColor:

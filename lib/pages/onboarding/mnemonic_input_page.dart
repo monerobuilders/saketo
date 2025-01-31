@@ -85,16 +85,6 @@ class _MnemonicInputPageState extends State<MnemonicInputPage> {
                                     color:
                                         Theme.of(context).colorScheme.tertiary,
                                     borderRadius: BorderRadius.circular(32)))),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Expanded(
-                            child: Container(
-                                height: 6,
-                                decoration: BoxDecoration(
-                                    color:
-                                        Theme.of(context).colorScheme.tertiary,
-                                    borderRadius: BorderRadius.circular(32)))),
                       ],
                     ),
                   ),

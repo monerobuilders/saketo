@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:saketo/pages/onboarding/create_pin_page.dart';
+import 'package:saketo/pages/main_wallet_page.dart';
+import 'package:saketo/pages/onboarding/create_password_page.dart';
 import 'package:saketo/pages/onboarding/entrypoint.dart';
 import 'package:saketo/pages/onboarding/mnemonic_display_page.dart';
 import 'package:saketo/pages/onboarding/mnemonic_input_page.dart';
@@ -29,9 +30,9 @@ final routerConfig = GoRouter(routes: [
     },
   ),
   GoRoute(
-      path: '/createPinPage',
+      path: '/createPasswordPage',
       builder: (context, state) {
-        return CreatePinPage(extra: state.extra as Map<String, Object>);
+        return CreatePasswordPage(extra: state.extra as Map<String, Object>);
       }),
   GoRoute(
       path: '/mnemonicDisplayPage',
@@ -43,4 +44,7 @@ final routerConfig = GoRouter(routes: [
       builder: (context, state) {
         return MnemonicInputPage(extra: state.extra as Map<String, Object>);
       }),
+  GoRoute(path: '/mainWalletPage', builder: (context, state) {
+    return const MainWalletPage();
+  }),
 ]);

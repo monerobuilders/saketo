@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Entrypoint extends StatefulWidget {
   const Entrypoint({super.key});
@@ -10,13 +11,26 @@ class Entrypoint extends StatefulWidget {
 }
 
 class _EntrypointState extends State<Entrypoint> {
+
+  Future<void> runChecks() async {
+    final isInitialized = await SharedPreferences.getInstance();
+    if (isInitialized.getBool('is_initialized') == null) {
+      Future.delayed(const Duration(seconds: 2), () {
+        context.go('/welcomePage');
+      });
+      return;
+    } else {
+      Future.delayed(const Duration(seconds: 2), () {
+        context.go('/mainWalletPage');
+      });
+      return;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(const Duration(seconds: 3), () {
-      context.go('/welcomePage');
-    });
+    runChecks();
   }
 
   @override

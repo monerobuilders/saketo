@@ -89,18 +89,6 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                                             .secondary,
                                         borderRadius:
                                             BorderRadius.circular(32)))),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                                child: Container(
-                                    height: 6,
-                                    decoration: BoxDecoration(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        borderRadius:
-                                            BorderRadius.circular(32)))),
                           ],
                         ),
                       ),
@@ -396,7 +384,7 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                                     'mnemonicType': _chosenMnemonicType!,
                                     'isPINConfirmation': false,
                                   });
-                                  context.push('/createPinPage', extra: widget.extra);
+                                  context.push('/createPasswordPage', extra: widget.extra);
                                 }
                               },
                               style: ElevatedButton.styleFrom(
