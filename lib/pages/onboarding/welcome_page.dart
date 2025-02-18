@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:saketo/pages/onboarding/mode_selection_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
+
+  static const routeName = '/welcomePage';
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -59,7 +62,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     const SizedBox(height: 32),
                     ElevatedButton(
                       onPressed: () {
-                        context.push('/modeSelectionPage',
+                        context.push(ModeSelectionPage.routeName,
                             extra: Map<String, Object>.from({
                               'isFirstTime': true,
                               'isCreateWallet': true,
@@ -97,7 +100,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         const SizedBox(height: 16),
                         ElevatedButton(
                             onPressed: () {
-                              context.push('/modeSelectionPage',
+                              context.push(ModeSelectionPage.routeName,
                                   extra: Map<String, Object>.from({
                                     'isFirstTime': true,
                                     'isCreateWallet': false,

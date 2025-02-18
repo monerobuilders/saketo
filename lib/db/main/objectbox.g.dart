@@ -14,7 +14,7 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import '../wallet/wallet.dart';
+import '../../wallet/wallet.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -22,7 +22,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 8423644325719568647),
       name: 'Wallet',
-      lastPropertyId: const obx_int.IdUid(4, 3729453898432994263),
+      lastPropertyId: const obx_int.IdUid(5, 8877733737431457110),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -91,7 +91,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [8877733737431457110],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -110,7 +110,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final internalIdOffset = fbb.writeString(object.internalId);
           final nameOffset = fbb.writeString(object.name);
           final modeNameOffset = fbb.writeString(object.modeName);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id ?? 0);
           fbb.addOffset(1, internalIdOffset);
           fbb.addOffset(2, nameOffset);

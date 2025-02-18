@@ -42,5 +42,20 @@
   "mnemonicConfiguration": "MNEMONIC CONFIGURATION",
   "mnemonicInputExplanation": "Please enter your mnemonic words in the correct order.",
   "word": "word",
-  "chooseAMnemonicType": "Please choose a mnemonic type."
+  "chooseAMnemonicType": "Please choose a mnemonic type.",
+  "deleteThisWallet": "Delete This Wallet",
+  "errorSavingMnemonic": "Error saving mnemonic",
+  "enterPasswordOf": "Enter password of \"{walletName}\"",
+  "@enterPasswordOf": {
+    "placeholders": {
+      "walletName": {
+        "type": "String",
+        "example": "My Main Wallet"
+      }
+    }
+  },
+  "enterThePassword": "Enter the password",
+  "wrongPassword": "Wrong password.",
+  "receive": "Receive",
+  "mainWalletAddress": "Main Wallet Address"
 }

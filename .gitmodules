@@ -1,3 +1,0 @@
-[submodule "external_libs/monero-wallet-util"]
-	path = external_libs/monero-wallet-util
-	url = https://github.com/monumexyz/monero-wallet-util/

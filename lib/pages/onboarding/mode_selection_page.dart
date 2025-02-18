@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:saketo/pages/onboarding/preview_configuration_page.dart';
 import 'package:saketo/wallet/wallet_modes/advanced/advanced_mode.dart';
 import 'package:saketo/wallet/wallet_modes/basic/basic_mode.dart';
 import 'package:saketo/wallet/wallet_modes/paranoia/paranoia_mode.dart';
@@ -12,6 +13,8 @@ class ModeSelectionPage extends StatefulWidget {
   final Map<String, Object> extra;
 
   const ModeSelectionPage({super.key, required this.extra});
+
+  static const routeName = '/modeSelectionPage';
 
   @override
   State<ModeSelectionPage> createState() => _ModeSelectionPageState();
@@ -26,7 +29,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
         child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.primary,
             body: Container(
-                padding: const EdgeInsets.all(32),
+                padding: const EdgeInsets.all(24),
                 child: Column(children: [
                   SizedBox(
                     width: double.infinity,
@@ -1054,7 +1057,7 @@ class _ModeSelectionPageState extends State<ModeSelectionPage> {
                                   widget.extra.addAll({
                                     'walletMode': _selectedMode,
                                   });
-                                  context.push('/previewConfigurationPage',
+                                  context.push(PreviewConfigurationPage.routeName,
                                       extra: widget.extra);
                                 },
                                 style: ElevatedButton.styleFrom(

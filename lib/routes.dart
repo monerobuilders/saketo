@@ -1,50 +1,63 @@
 import 'package:go_router/go_router.dart';
+import 'package:saketo/pages/enter_password_page.dart';
 import 'package:saketo/pages/main_wallet_page.dart';
 import 'package:saketo/pages/onboarding/create_password_page.dart';
-import 'package:saketo/pages/onboarding/entrypoint.dart';
+import 'package:saketo/pages/entrypoint.dart';
 import 'package:saketo/pages/onboarding/mnemonic_display_page.dart';
 import 'package:saketo/pages/onboarding/mnemonic_input_page.dart';
 import 'package:saketo/pages/onboarding/mode_selection_page.dart';
 import 'package:saketo/pages/onboarding/preview_configuration_page.dart';
 import 'package:saketo/pages/onboarding/welcome_page.dart';
+import 'package:saketo/pages/receive/main_recive_page.dart';
+import 'package:saketo/pages/settings/main_settings_page.dart';
+import 'package:saketo/wallet/wallet.dart';
 
 final routerConfig = GoRouter(routes: [
   GoRoute(
-    path: '/',
+    path: Entrypoint.routeName,
     builder: (context, state) => const Entrypoint(),
   ),
   GoRoute(
-    path: '/welcomePage',
+    path: WelcomePage.routeName,
     builder: (context, state) => const WelcomePage(),
   ),
   GoRoute(
-      path: '/modeSelectionPage',
+      path: ModeSelectionPage.routeName,
       builder: (context, state) {
         return ModeSelectionPage(extra: state.extra as Map<String, Object>);
       }),
   GoRoute(
-    path: '/previewConfigurationPage',
+    path: PreviewConfigurationPage.routeName,
     builder: (context, state) {
       return PreviewConfigurationPage(
           extra: state.extra as Map<String, Object>);
     },
   ),
   GoRoute(
-      path: '/createPasswordPage',
+      path: CreatePasswordPage.routeName,
       builder: (context, state) {
         return CreatePasswordPage(extra: state.extra as Map<String, Object>);
       }),
   GoRoute(
-      path: '/mnemonicDisplayPage',
+      path: MnemonicDisplayPage.routeName,
       builder: (context, state) {
         return MnemonicDisplayPage(extra: state.extra as Map<String, Object>);
       }),
   GoRoute(
-      path: '/mnemonicInputPage',
+      path: MnemonicInputPage.routeName,
       builder: (context, state) {
         return MnemonicInputPage(extra: state.extra as Map<String, Object>);
       }),
-  GoRoute(path: '/mainWalletPage', builder: (context, state) {
-    return const MainWalletPage();
+  GoRoute(path: MainWalletPage.routeName, builder: (context, state) {
+    return MainWalletPage(theWallet: state.extra as Wallet);
   }),
+  GoRoute(path: MainSettingsPage.routeName, builder: (context, state) {
+    return MainSettingsPage(theWallet: state.extra as Wallet);
+  }),
+  GoRoute(path: EnterPasswordPage.routeName, builder: (context, state) {
+    return EnterPasswordPage(theWallet: state.extra as Wallet);
+  }),
+  GoRoute(path: MainReceivePage.routeName, builder: (context, state) {
+    return MainReceivePage(theWallet: state.extra as Wallet);
+  })
 ]);

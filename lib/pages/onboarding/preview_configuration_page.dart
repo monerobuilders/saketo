@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:saketo/pages/onboarding/create_password_page.dart';
 import 'package:saketo/wallet/wallet_modes/basic/basic_mode.dart';
 
 import '../../wallet/mnemonics/types/mnemonic_type.dart';
@@ -11,6 +12,8 @@ class PreviewConfigurationPage extends StatefulWidget {
   final Map<String, Object> extra;
 
   const PreviewConfigurationPage({super.key, required this.extra});
+
+  static const routeName = '/previewConfigurationPage';
 
   @override
   State<PreviewConfigurationPage> createState() =>
@@ -33,7 +36,7 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).colorScheme.primary,
         body: Container(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.all(24),
             child: Column(
               children: [
                 SizedBox(
@@ -111,9 +114,9 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                         height: 80,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(12),
                         child: Row(
                           children: [
                             AspectRatio(
@@ -130,8 +133,8 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                                     colorFilter: ColorFilter.mode(
                                         Theme.of(context).colorScheme.tertiary,
                                         BlendMode.srcIn),
-                                    height: 24,
-                                    width: 24,
+                                    height: 32,
+                                    width: 32,
                                   ),
                                 ),
                               ),
@@ -384,7 +387,7 @@ class _PreviewConfigurationPageState extends State<PreviewConfigurationPage> {
                                     'mnemonicType': _chosenMnemonicType!,
                                     'isPINConfirmation': false,
                                   });
-                                  context.push('/createPasswordPage', extra: widget.extra);
+                                  context.push(CreatePasswordPage.routeName, extra: widget.extra);
                                 }
                               },
                               style: ElevatedButton.styleFrom(

@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:saketo/pages/enter_password_page.dart';
+import 'package:saketo/pages/main_wallet_page.dart';
+import 'package:saketo/pages/onboarding/welcome_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
+import '../wallet/wallet.dart';
 
 class Entrypoint extends StatefulWidget {
   const Entrypoint({super.key});
+
+  static const routeName = '/';
 
   @override
   State<Entrypoint> createState() => _EntrypointState();
@@ -14,14 +22,20 @@ class _EntrypointState extends State<Entrypoint> {
 
   Future<void> runChecks() async {
     final isInitialized = await SharedPreferences.getInstance();
-    if (isInitialized.getBool('is_initialized') == null) {
+    if (!mounted) {
+      runChecks();
+      return;
+    }
+    if (isInitialized.getBool('is_initialized') == null ||
+        !isInitialized.getBool('is_initialized')!) {
       Future.delayed(const Duration(seconds: 2), () {
-        context.go('/welcomePage');
+        if (mounted) context.go(WelcomePage.routeName);
       });
       return;
     } else {
       Future.delayed(const Duration(seconds: 2), () {
-        context.go('/mainWalletPage');
+        final theWallet = objectbox.store.box<Wallet>().getAll().first;
+        if (mounted) context.go(EnterPasswordPage.routeName, extra: theWallet);
       });
       return;
     }

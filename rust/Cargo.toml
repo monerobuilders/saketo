@@ -7,7 +7,10 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-polyseed = { path = "../external_libs/monero-wallet-util/polyseed" }
-monero-seed = { path = "../external_libs/monero-wallet-util/seed" }
+polyseed = { git = "https://github.com/monumexyz/monero-wallet-util" }
+monero-seed = { git = "https://github.com/monumexyz/monero-wallet-util" }
 rand = "0.8.5"
 zeroize = "1.8.1"
+aes-gcm = "0.10.3"
+argon2 = "0.5.3"
+base64 = "0.22.1"

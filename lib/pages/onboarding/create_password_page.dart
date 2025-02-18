@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:saketo/pages/onboarding/mnemonic_display_page.dart';
+import 'package:saketo/pages/onboarding/mnemonic_input_page.dart';
 
 class CreatePasswordPage extends StatefulWidget {
   final Map<String, Object> extra;
 
   const CreatePasswordPage({super.key, required this.extra});
+
+  static const routeName = '/createPasswordPage';
 
   @override
   State<CreatePasswordPage> createState() => _CreatePasswordPageState();
@@ -24,7 +28,7 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         resizeToAvoidBottomInset: false,
         body: Container(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.all(24),
             child: Column(
               children: [
                 SizedBox(
@@ -276,10 +280,10 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                                       'password': password,
                                     });
                                     if (widget.extra['isCreateWallet'] as bool) {
-                                      context.push('/mnemonicDisplayPage',
+                                      context.push(MnemonicDisplayPage.routeName,
                                           extra: widget.extra);
                                     } else {
-                                      context.push('/mnemonicInputPage',
+                                      context.push(MnemonicInputPage.routeName,
                                           extra: widget.extra);
                                     }
                                   }

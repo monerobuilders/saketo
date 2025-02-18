@@ -1,13 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:saketo/db/objectbox.g.dart';
 import 'package:saketo/main.dart';
+import 'package:saketo/pages/enter_password_page.dart';
+import 'package:saketo/pages/main_wallet_page.dart';
 import 'package:saketo/wallet/mnemonics/types/mnemonic_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+import '../../db/secure/secure_db.dart';
 import '../../wallet/wallet.dart';
 import '../../wallet/wallet_modes/wallet_mode_abstract.dart';
 
@@ -16,17 +19,19 @@ class MnemonicDisplayPage extends StatelessWidget {
 
   const MnemonicDisplayPage({super.key, required this.extra});
 
+  static const routeName = '/mnemonicDisplayPage';
+
   @override
   Widget build(BuildContext context) {
     int index = 0;
     MnemonicType chosenMnemonicType = extra['mnemonicType'] as MnemonicType;
     int wordCount = chosenMnemonicType.wordCount;
-    List<String> mnemonicWords = chosenMnemonicType.generateMnemonic();
+    List<String> mnemonicWords = chosenMnemonicType.generateMnemonic();;
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Container(
-        padding: const EdgeInsets.all(32),
+        padding: const EdgeInsets.all(24),
         child: Column(
           children: [
             SizedBox(
@@ -261,16 +266,27 @@ class MnemonicDisplayPage extends StatelessWidget {
                   Expanded(
                       child: ElevatedButton(
                           onPressed: () async {
-                            final internalId = const Uuid().v4();
-                            objectbox.store.box<Wallet>().put(Wallet(
-                              internalId: internalId,
+                            final wallet = Wallet(
+                              internalId: const Uuid().v4(),
                               name: extra['walletName'] as String,
                               modeName: (extra['walletMode'] as WalletMode).name,
-                            ));
+                            );
+                            objectbox.store.box<Wallet>().put(wallet);
+                            final isSaved = await wallet.saveMnemonic(mnemonicWords.join(" "), extra['password'] as String);
+                            if (!context.mounted) return;
+                            if (!isSaved) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      duration: const Duration(seconds: 2),
+                                      content: Text(
+                                          AppLocalizations.of(context)!.errorSavingMnemonic)));
+                              return;
+                            }
+                            extra.remove('password');
                             final sharedPrefs = await SharedPreferences.getInstance();
                             sharedPrefs.setBool("is_initialized", true);
                             if (context.mounted) {
-                              context.push('/mainWalletPage', extra: extra);
+                              context.go(EnterPasswordPage.routeName, extra: wallet);
                             }
                           },
                           style: ElevatedButton.styleFrom(
